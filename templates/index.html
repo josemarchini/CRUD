@@ -1,0 +1,95 @@
+<!-- creo la pagina principal con la estrutura para una tabella che va ser estilizada en el archivo styles.css-->
+<!-- uso el codigo css de la carpeta css-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CRUD Happiness</title> 
+<link rel="stylesheet" type="text/css" href="static/styles.css"> <!-- uso el archivo styles.css -->
+<link rel="stylesheet" type="text/css" href="static/menu.css"> <!-- uso el archivo Menu.css -->
+<link rel="stylesheet" type="text/css" href="static/modal.css"> <!-- uso el archivo Modal.css -->
+<script  src="script.js"></script> <!-- uso el archivo script.js -->
+</head>
+<body>
+<!-- creo el menu de la pagina -->
+<h1>
+<nav id='menu'>
+    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+    <ul>
+      <!--<li><a href='http://'>Home</a></li>
+      <li><a class='dropdown-arrow' href='http://'>Products</a>
+        <ul class='sub-menus'>
+          <li><a href='http://'>Products 1</a></li>
+          <li><a href='http://'>Products 2</a></li>
+          <li><a href='http://'>Products 3</a></li>
+          <li><a href='http://'>Products 4</a></li>
+        </ul>
+      </li>
+      <li><a href='http://'>About</a></li>
+      <li><a class='dropdown-arrow' href='http://'>Services</a>
+        <ul class='sub-menus'>
+          <li><a href='http://'>Services 1</a></li>
+          <li><a href='http://'>Services 2</a></li>
+          <li><a href='http://'>Services 3</a></li>
+        </ul>
+      </li>
+      <li><a href='http://'>Contact Us</a></li>-->
+    </ul>
+  </nav>
+</h1>
+
+<!-- SECCION CRUD -->
+<section id="crud" class="crud">
+  <div class="contenido-seccion">
+      <h2>CRUD</h2>
+      <h3></h3>
+  <!-- creo la tabla con el id costumers -->
+  <table id="customers"> <!-- creo la tabla con el id costumers -->
+<thead>
+  <tr> <!-- creo la fila de la tabla -->
+  <th>Nome</th> <!-- creo la celda de la tabla -->
+  <th>Cognome</th> 
+  <th>Età</th>
+  <th>Email</th>
+  <th>Actions</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<br><br>
+<!-- creo el boton al centro para agregar un nuevo customer -->
+<div style="text-align:center"><a onclick="agregar()" href="#crud" class="myButton">Aggiungi Cliente</a></div>
+
+<!-- dejo un espacio con la tabella-->
+<br>
+
+  <!-- Modal -->
+  <div id="modal" class="modale" aria-hidden="true">
+  
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2>New Client</h2>
+          <a onclick="cerrarModal()" href="#crud" class="btn-close closemodale" aria-hidden="true">&times;</a>
+        </div>
+        <div class="modal-body">
+          <input id="txtId" type="hidden" placeholder="Id" size="20" /><br>
+          <input id="txtFirstname" type="text" placeholder="Nome" size="20" /><br>
+          <input id="txtLastname" type="text" placeholder="Cognome" size="20" /><br>
+          <input id="txtPhone" type="text" placeholder="Eta" size="20" /><br>
+          <input id="txtEmail" type="text" placeholder="Email" size="20" /><br>
+          <input id="txtAddress" type="text" placeholder="Address" size="20" /><br>
+          
+        <div class="modal-footer">
+      
+    
+          <br><a onclick="save()" href="#crud" class="btn" id="btn_ingresar">Aggiungi</a>
+        </div>
+      </div>
+    </div>
+    <!-- /Modal -->
+</section>
+
+</body>
+</html>
+
