@@ -11,7 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Exitosox100pre'
-app.config['MYSQL_DB'] = 'pagepersonal'
+app.config['MYSQL_DB'] = 'progetto_happiness'
 mysql = MySQL(app)
 
 
@@ -19,18 +19,24 @@ mysql = MySQL(app)
 @cross_origin()
 def getCustomerById(id):
     cur=mysql.connection.cursor()
-    sql="SELECT id, name, lastname, email, phone, address FROM customers WHERE id = " + str(id) + ""
+    sql="SELECT * FROM countries_parameters WHERE id = " + str(id) + ""
     cur.execute(sql)
     data=cur.fetchall()
     customer={}
     for customer in data:
         customer = {
-            'id': customer[0],
-            'name': customer[1],
-            'lastname': customer[2],
-            'email': customer[3],
-            'phone': customer[4],
-            'address': customer[5]
+            'Id': customer[0],
+            'Country': customer[1],
+            'Rank': customer[2],
+            'Happiness_score': customer[3],
+            'Year_score': customer[4],
+            'GDP_per_capita': customer[5],
+            'Social_support': customer[6],
+            'Life_expectancy': customer[7],
+            'Freedom': customer[8],
+            'Generosity': customer[9],
+            'Perceptions_of_corruption': customer[10],
+            'Dystopia': customer[11]
         }
     return jsonify(customer)
 
@@ -39,18 +45,24 @@ def getCustomerById(id):
 @cross_origin()
 def getAllCustomers():
     cur=mysql.connection.cursor()
-    sql="SELECT id, name, lastname, email, phone, address FROM customers"
+    sql="SELECT * FROM countries_parameters" #ORDER BY Happiness_score DESC
     cur.execute(sql)
     data=cur.fetchall()
     result = []
     for customer in data:
         customer = {
-            'id': customer[0],
-            'name': customer[1],
-            'lastname': customer[2],
-            'email': customer[3],
-            'phone': customer[4],
-            'address': customer[5]
+            'Id': customer[0],
+            'Country': customer[1],
+            'Rank': customer[2],
+            'Happiness_score': customer[3],
+            'Year_score': customer[4],
+            'GDP_per_capita': customer[5],
+            'Social_support': customer[6],
+            'Life_expectancy': customer[7],
+            'Freedom': customer[8],
+            'Generosity': customer[9],
+            'Perceptions_of_corruption': customer[10],
+            'Dystopia': customer[11]
         }
         result.append(customer)
     return jsonify(result)
@@ -62,7 +74,7 @@ def getAllCustomers():
 def removeCustomer(id):
     #delete customer 2
     cur=mysql.connection.cursor()
-    sql="DELETE FROM customers WHERE id = " + str(id) + ""
+    sql="DELETE FROM countries_parameters WHERE id = " + str(id) + ""
     cur.execute(sql)
     mysql.connection.commit()
 
@@ -82,8 +94,8 @@ def createCustomer():
 
 def saveCustomer():
     cur=mysql.connection.cursor()
-    sql="INSERT INTO customers (name, lastname, email, phone, address) VALUES (%s, %s, %s, %s, %s)"
-    dati=(request.json['name'], request.json['lastname'], request.json['email'], request.json['phone'], request.json['address'])
+    sql="INSERT INTO countries_parameters (Country, Rank, Happiness_score, Year_score, GDP_per_capita, Social_support, Life_expectancy, Freedom, Generosity, Perceptions_of_corruption, Dystopia) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    dati=(request.json['Country'], request.json['Rank'], request.json['Happiness_score'], request.json['Year_score'], request.json['GDP_per_capita'], request.json['Social_support'], request.json['Life_expectancy'], request.json['Freedom'], request.json['Generosity'], request.json['Perceptions_of_corruption'], request.json['Dystopia'])
     cur.execute(sql, dati)
     mysql.connection.commit()
 
@@ -95,8 +107,8 @@ def saveCustomer():
 def updateCustomer():
     cur=mysql.connection.cursor()
     #update customer
-    sql="UPDATE customers SET name = %s, lastname = %s, email = %s, phone = %s, address = %s WHERE id = %s"
-    dati=(request.json['name'], request.json['lastname'], request.json['email'], request.json['phone'], request.json['address'], request.json['id'])
+    sql="UPDATE countries_parameters SET Country = %s, Rank = %s, Happiness_score = %s, Year_score = %s, GDP_per_capita = %s, Social_support = %s, Life_expectancy = %s, Freedom = %s, Generosity = %s, Perceptions_of_corruption = %s, Dystopia = %s WHERE id = " + str(request.json['id']) + ""
+    dati=(request.json['Country'], request.json['Rank'], request.json['Happiness_score'], request.json['Year_score'], request.json['GDP_per_capita'], request.json['Social_support'], request.json['Life_expectancy'], request.json['Freedom'], request.json['Generosity'], request.json['Perceptions_of_corruption'], request.json['Dystopia'])
     cur.execute(sql, dati)
     mysql.connection.commit()
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>CRUD Happiness</title> 
+<title>Tabella</title> 
 <link rel="stylesheet" type="text/css" href="static/styles.css"> <!-- uso el archivo styles.css -->
 <link rel="stylesheet" type="text/css" href="static/menu.css"> <!-- uso el archivo Menu.css -->
 <link rel="stylesheet" type="text/css" href="static/modal.css"> <!-- uso el archivo Modal.css -->
@@ -14,9 +14,9 @@
 <!-- creo el menu de la pagina -->
 <h1>
 <nav id='menu'>
-    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
+    <!--<input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
     <ul>
-      <!--<li><a href='http://'>Home</a></li>
+      <li><a href='http://'>Home</a></li>
       <li><a class='dropdown-arrow' href='http://'>Products</a>
         <ul class='sub-menus'>
           <li><a href='http://'>Products 1</a></li>
@@ -33,62 +33,78 @@
           <li><a href='http://'>Services 3</a></li>
         </ul>
       </li>
-      <li><a href='http://'>Contact Us</a></li>-->
-    </ul>
+      <li><a href='http://'>Contact Us</a></li>
+    </ul>-->
   </nav>
 </h1>
 
-<!-- SECCION CRUD -->
+<!--  -- SECCION CRUD --
 <section id="crud" class="crud">
   <div class="contenido-seccion">
       <h2>CRUD</h2>
-      <h3></h3>
-  <!-- creo la tabla con el id costumers -->
-  <table id="customers"> <!-- creo la tabla con el id costumers -->
+      <h3></h3> -->
+
+<!-- creo el titulo de la pagina al centro -->
+<h1 style="text-align:center">CRUD</h1>
+
+<!-- creo el boton al centro para agregar un nuevo customer -->
+<div style="text-align:center"><a onclick="agregar()" href="#" class="myButton">Aggiungi Cliente</a></div>
+
+<!-- dejo un espacio con la tabella-->
+<br>
+<!-- creo la tabla con el id costumers -->
+<table id="customers"> <!-- creo la tabla con el id costumers -->
 <thead>
-  <tr> <!-- creo la fila de la tabla -->
-  <th>Nome</th> <!-- creo la celda de la tabla -->
-  <th>Cognome</th> 
-  <th>Età</th>
-  <th>Email</th>
-  <th>Actions</th>
-</tr>
+    <tr> <!-- creo la fila de la tabla -->
+    <th>Country</th> <!-- creo la celda de la tabla -->
+    <th>Rank</th> 
+    <th>Happiness_score</th>
+    <th>Year_score</th>
+    <th>GDP_per_capita</th>
+    <th>Social_support</th>
+    <th>Life_expectancy</th>
+    <th>Freedom</th>
+    <th>Generosity</th>
+    <th>Perceptions_of_corruption</th>
+    <th>Dystopia</th>
+  </tr>
 </thead>
 <tbody>
 </tbody>
 </table>
-<br><br>
-<!-- creo el boton al centro para agregar un nuevo customer -->
-<div style="text-align:center"><a onclick="agregar()" href="#crud" class="myButton">Aggiungi Cliente</a></div>
 
-<!-- dejo un espacio con la tabella-->
-<br>
+<!-- agrego mi boton login para abrir y cerrar el modal-->
 
-  <!-- Modal -->
-  <div id="modal" class="modale" aria-hidden="true">
-  
-      <div class="modal-dialog">
-        <div class="modal-header">
-          <h2>New Client</h2>
-          <a onclick="cerrarModal()" href="#crud" class="btn-close closemodale" aria-hidden="true">&times;</a>
-        </div>
-        <div class="modal-body">
-          <input id="txtId" type="hidden" placeholder="Id" size="20" /><br>
-          <input id="txtFirstname" type="text" placeholder="Nome" size="20" /><br>
-          <input id="txtLastname" type="text" placeholder="Cognome" size="20" /><br>
-          <input id="txtPhone" type="text" placeholder="Eta" size="20" /><br>
-          <input id="txtEmail" type="text" placeholder="Email" size="20" /><br>
-          <input id="txtAddress" type="text" placeholder="Address" size="20" /><br>
-          
-        <div class="modal-footer">
-      
+    <!-- Modal -->
+    <div id="modal" class="modale" aria-hidden="true">
     
-          <br><a onclick="save()" href="#crud" class="btn" id="btn_ingresar">Aggiungi</a>
+        <div class="modal-dialog">
+          <div class="modal-header">
+            <h2>New Client</h2>
+            <a onclick="cerrarModal()" href="#" class="btn-close closemodale" aria-hidden="true">&times;</a>
+          </div>
+          <div class="modal-body">
+            <input id="txtId" type="hidden" placeholder="Id" size="20" /><br>
+            <input id="txtCountry" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtRank" type="text" placeholder="Cognome" size="20" /><br>
+            <input id="txtHappiness_score" type="text" placeholder="Eta" size="20" /><br>
+            <input id="txtYear_score" type="text" placeholder="Email" size="20" /><br>
+            <input id="txtGDP_per_capita" type="text" placeholder="Address" size="20" /><br>
+            <input id="txtSocial_support" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtLife_expectancy" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtFreedom" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtGenerosity" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtPerceptions_of_corruption" type="text" placeholder="Nome" size="20" /><br>
+            <input id="txtDystopia" type="text" placeholder="Nome" size="20" /><br>
+            
+          <div class="modal-footer">
+        
+      
+            <a onclick="save()" href="#" class="btn" id="btn_ingresar">Aggiungi</a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- /Modal -->
-</section>
+      <!-- /Modal -->
 
 </body>
 </html>
