@@ -4,7 +4,7 @@
 
 
 document.addEventListener('DOMContentLoaded', init);
-const URL_API = 'http://localhost:3000/api/';
+const URL_API = 'http://localhost:5000/api/';
 
 var customers = [];
 
@@ -50,16 +50,12 @@ async function search() {
     <td>${customer.Rank}</td>
     <td>${customer.Happiness_score}</td>
     <td>${customer.Year_score}</td>
-    <td>${customer.GDP_per_capita}</td>
-    <td>${customer.Social_support}</td>
-    <td>${customer.Life_expectancy}</td>
-    <td>${customer.Freedom}</td>
-    <td>${customer.Generosity}</td>
-    <td>${customer.Perceptions_of_corruption}</td>
-    <td>${customer.Dystopia}</td>
-    <td style="text-align:center"><a href="#" onclick="edit(${customer.Id})" class="myButton">Modifica</a>
+    <td>${customer.Parameters}</td>
+    <td>${customer.Value_parameters}</td>
+    
+    <!-- <td style="text-align:center"><a href="#" onclick="edit(${customer.Id})" class="myButton">Modifica</a>
                                  <a href="#" onclick="remove(${customer.Id})" class="myButtonD">Elimina</a></td>
-    </tr>` 
+    </tr> -->` 
 
     html += row;
     }
@@ -75,13 +71,8 @@ function edit(Id) {
     document.getElementById('txtRank').value = customer.Rank;
     document.getElementById('txtHappiness_score').value = customer.Happiness_score;
     document.getElementById('txtYear_score').value = customer.Year_score;
-    document.getElementById('txtGDP_per_capita').value = customer.GDP_per_capita;
-    document.getElementById('txtSocial_support').value = customer.Social_support;
-    document.getElementById('txtLife_expectancy').value = customer.Life_expectancy;
-    document.getElementById('txtFreedom').value = customer.Freedom;
-    document.getElementById('txtGenerosity').value = customer.Generosity;
-    document.getElementById('txtPerceptions_of_corruption').value = customer.Perceptions_of_corruption;
-    document.getElementById('txtDystopia').value = customer.Dystopia;
+    document.getElementById('txtParameter').value = customer.Parameters;
+    document.getElementById('txtValue_parameters').value = customer.Value_parameters;
      
 }
 
@@ -108,13 +99,9 @@ function clean() {
     document.getElementById('txtRank').value = '';
     document.getElementById('txtHappiness_score').value = '';
     document.getElementById('txtYear_score').value = '';
-    document.getElementById('txtGDP_per_capita').value = '';
-    document.getElementById('txtSocial_support').value = '';
-    document.getElementById('txtLife_expectancy').value = '';
-    document.getElementById('txtFreedom').value = '';
-    document.getElementById('txtGenerosity').value = '';
-    document.getElementById('txtPerceptions_of_corruption').value = '';
-    document.getElementById('txtDystopia').value = '';
+    document.getElementById('txtParameters').value = '';
+    document.getElementById('txtValue_parameters').value = '';
+    
 }
 
 
@@ -129,13 +116,9 @@ async function save() {
         'Rank': document.getElementById('txtRank').value,
         'Happiness_score': document.getElementById('txtHappiness_score').value,
         'Year_score': document.getElementById('txtYear_score').value,
-        'GDP_per_capita': document.getElementById('txtGDP_per_capita').value,
-        'Social_support': document.getElementById('txtSocial_support').value,
-        'Life_expectancy': document.getElementById('txtLife_expectancy').value,
-        'Freedom': document.getElementById('txtFreedom').value,
-        'Generosity': document.getElementById('txtGenerosity').value,
-        'Perceptions_of_corruption': document.getElementById('txtPerceptions_of_corruption').value,
-        'Dystopia': document.getElementById('txtDystopia').value
+        'Parameters': document.getElementById('txtParameters').value,
+        'Value_parameters': document.getElementById('txtValue_parameters').value,
+        
     }
 
     if (Id != '') {
@@ -145,12 +128,17 @@ async function save() {
 
     var url = URL_API + "customers";
     await fetch(url, {
-        method: 'POST',
+        //mode: 'cors',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     })
+    .then(response => response.json())
+    .then(data => {console.log(data);})
+    .catch(error => {console.error(error)})
+
     window.location.reload();  
 }
 
