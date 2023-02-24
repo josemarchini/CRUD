@@ -144,7 +144,7 @@ def elenco():
     perfile= 'C://Users/alonso/Documents/CursoGeneration/ProggettoFinale/CRUD/templates/prova.html'
     file=open(perfile, 'w')
     intestazione = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>HAPPINESS SCORE</title>\n</head>\n' \
-                   '<body bgcolor="#2b6e8d">ELENCO PAESI, GDP PER CAPITA E ANNO:<ol>'
+                   '<style> h1 {text-align: center;} </style> <body ali bgcolor="#F3F768"> <h1>ELENCO PAESI, GDP PER CAPITA E ANNO: </h1> <ol>'
     finale = '</ol></body></html>'
     file.write(intestazione)
     cur.execute("SELECT Country,Value_parameters,Year_score FROM parameters INNER JOIN links ON "
@@ -152,10 +152,47 @@ def elenco():
                      "links.id_country=countries.id_country WHERE parameters.Parameters='GDP_per_capita';")
     myresult = cur.fetchall()
     for i in myresult:
-        file.write('<li>'+str(i[0])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[1])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[2])+'</li>')
+        file.write('<h4> <li>'+str(i[0])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[1])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[2])+'</li> </h4>')
     file.write(finale)
     file.close()
     return render_template('prova.html')
+
+
+@app.route('/risultato1', methods=['GET'])
+def elencoHP():
+    cur=mysql.connection.cursor()
+    #se apro la pagina elenco, apro il DB
+    perfile= 'C://Users/alonso/Documents/CursoGeneration/ProggettoFinale/CRUD/templates/prova1.html'
+    file=open(perfile, 'w')
+    intestazione = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>HAPPINESS SCORE</title>\n</head>\n' \
+                   '<style> h1 {text-align: center;} </style> <body bgcolor="#F3F768"> <h1> MEDIA DEL HAPPINESS_SCORE RAGGRUPPATO PER PAESE: </h1><ol>'
+    finale = '</ol></body></html>'
+    file.write(intestazione)
+    cur.execute("select Country, avg(countries.Happiness_score) as Media_Happiness_score from happiness.countries group by Country;")
+    myresult = cur.fetchall()
+    for i in myresult:
+        file.write('<h4> <li>'+str(i[0])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[1])+'</li> </h4>')
+    file.write(finale)
+    file.close()
+    return render_template('prova1.html')
+
+@app.route('/risultato2', methods=['GET'])
+def elencoHPpaesi():
+    cur=mysql.connection.cursor()
+    #se apro la pagina elenco, apro il DB
+    perfile= 'C://Users/alonso/Documents/CursoGeneration/ProggettoFinale/CRUD/templates/prova2.html'
+    file=open(perfile, 'w')
+    intestazione = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<title>HAPPINESS SCORE</title>\n</head>\n' \
+                   '<style> h1 {text-align: center;} </style> <body bgcolor="#F3F768"> <h1> MEDIA DEL HAPPINESS_SCORE RAGGRUPPATO PER ITALIA, FILIPPINE, PERU, ALBANIA, UCRAINA </h1>'
+    finale = '</body></html>'
+    file.write(intestazione)
+    cur.execute("select Country, avg(countries.Happiness_score) as Media_Happiness_score from happiness.countries where Country like 'Italy' or Country like 'Peru' or Country like 'Albania' or Country like 'Philippines' or Country like 'Ukraine' group by Country order by Media_Happiness_score desc;")
+    myresult = cur.fetchall()
+    for i in myresult:
+        file.write('<br><br><br><center><h4><li>'+str(i[0])+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+str(i[1])+'</li> </h4></center>')
+    file.write(finale)
+    file.close()
+    return render_template('prova2.html')
 
 
 
