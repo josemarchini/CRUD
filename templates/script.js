@@ -142,7 +142,23 @@ async function save() {
     window.location.reload();  
 }
 
+//voglio creare la funcion link1 que mi porti a http://localhost:5000/risultato
 
+function link1() {
+    window.location.href = "http://localhost:5000/risultato";
+}
+
+//voglio creare la funcion link2 que mi porti a http://localhost:5000/risultato1
+
+function link2() {
+    window.location.href = "http://localhost:5000/risultato1";
+}
+
+//voglio creare la funcion link3 que mi porti a http://localhost:5000/risultato2
+
+function link3() {
+    window.location.href = "http://localhost:5000/risultato2";
+}
 
 
 

@@ -75,68 +75,6 @@ def removeCustomer(id):
     return 'Remove Customer'
 
 
-@app.route('/api/customers', methods=['POST'])
-@cross_origin()
-def createCustomer():
-    if 'id' in request.json:
-        updateCustomer()
-    else:
-        saveCustomer()
-    
-    return 'ok'
-
-
-def saveCustomer():
-    cur=mysql.connection.cursor()
-    #sql="INSERT INTO countries_parameters (Country, Rank, Happiness_score, Year_score, GDP_per_capita, Social_support, Life_expectancy, Freedom, Generosity, Perceptions_of_corruption, Dystopia) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    #dati=(request.json['Country'], request.json['Rank'], request.json['Happiness_score'], request.json['Year_score'], request.json['GDP_per_capita'], request.json['Social_support'], request.json['Life_expectancy'], request.json['Freedom'], request.json['Generosity'], request.json['Perceptions_of_corruption'], request.json['Dystopia'])
-    sql="INSERT INTO customers (Country) VALUES ('%s')"
-    dati=(request.json['Country'])
-    cur.execute(sql, dati)
-    mysql.connection.commit()
-
-    return 'Save Customer'
-
-
-@app.route('/api/customers', methods=['GET'])
-@cross_origin()
-def updateCustomer():
-    cur=mysql.connection.cursor()
-    #update customer
-    sql="UPDATE customers SET Country = %s, Rank = %s, Happiness_score = %s, Year_score = %s, GDP_per_capita = %s, Social_support = %s, Life_expectancy = %s, Freedom = %s, Generosity = %s, Perceptions_of_corruption = %s, Dystopia = %s WHERE id = " + str(request.json['id']) + ""
-    dati=(request.json['Country'], request.json['Rank'], request.json['Happiness_score'], request.json['Year_score'], request.json['GDP_per_capita'], request.json['Social_support'], request.json['Life_expectancy'], request.json['Freedom'], request.json['Generosity'], request.json['Perceptions_of_corruption'], request.json['Dystopia'])
-    cur.execute(sql, dati)
-    mysql.connection.commit()
-
-    return 'Save Customer'
-
-
-
-
-@app.route('/')
-@cross_origin()
-def index():
-    return render_template('index.html')
-
-
-#voglio mostrare tutti i file che sono nella cartella templates 
-@app.route('/<path:path>')
-@cross_origin()
-def publicFiles(path):
-    return app.send_static_file(path)
-
-
-
-
-'''@app.route('/', methods=['GET'])
-def home():
-    titolo = '<h2>PROGETTO HAPPINESS</h2>'
-    richiesta1 = '<form action="/database" method="GET">' \
-                 '<a href="/database"><h3>Visualizza tutto il database</h3></a></form>'
-    richiesta2 ='<form action = "/anno" method= "POST">Seleziona l\'anno che ti interessa tra' \
-                ' 2017,2018,2019,2020,2021,2022: <input name="texta"> <input type="submit" value="Invio"></form>'
-    return titolo + '<br>'+'<br>' + richiesta1 + '<br>' + richiesta2'''
-
 @app.route('/risultato', methods=['GET'])
 def elenco():
     cur=mysql.connection.cursor()
@@ -196,9 +134,17 @@ def elencoHPpaesi():
 
 
 
+@app.route('/')
+@cross_origin()
+def index():
+    return render_template('index.html')
 
 
-
+#voglio mostrare tutti i file che sono nella cartella templates 
+@app.route('/<path:path>')
+@cross_origin()
+def publicFiles(path):
+    return app.send_static_file(path)
 
 
 

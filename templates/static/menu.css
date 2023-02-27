@@ -6,7 +6,7 @@
 
 
 #menu {
-	background: #b6b313;
+	background: #0C98D8;
 	color: #FFF;
 	height: 47px;
 	padding-left: 18px;
@@ -69,7 +69,7 @@
 	height: auto;
 	overflow: hidden;
 	width: 170px;
-	background: #444444;
+	background: #c7c7c7;
 	position: absolute;
 	z-index: 99;
 	display: none;
@@ -87,7 +87,7 @@
 }
 #menu ul.sub-menus a:hover{
 	background: #F2F2F2;
-	color: #444444;
+	color: #cccbcb;
 }
 @media screen and (max-width: 800px){
 	#menu {position:relative}
